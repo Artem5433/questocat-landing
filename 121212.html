@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КвестоКот - Волшебное Приключение</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.3); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.6), 0 0 30px rgba(255,255,255,0.4); }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            margin: 40px 0;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .play-button {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .play-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+        }
+
+        .screenshots {
+            margin: 60px 0;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .screenshot-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-content h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .card-content p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 60px 0;
+            margin: 60px 0;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .feature-item p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-content {
+            color: #fff;
+        }
+
+        .footer-social {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-cat {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .play-button { font-size: 1.2rem; padding: 15px 30px; }
+            .screenshot-grid { grid-template-columns: 1fr; }
+            .header-content { flex-direction: column; gap: 20px; }
+            .social-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-cat" style="left: 10%; top: 10%; animation-delay: 0s;">🐱</div>
+        <div class="floating-cat" style="left: 80%; top: 20%; animation-delay: 2s;">🎮</div>
+        <div class="floating-cat" style="left: 20%; top: 70%; animation-delay: 4s;">⭐</div>
+        <div class="floating-cat" style="left: 70%; top: 80%; animation-delay: 1s;">🏆</div>
+        <div class="floating-cat" style="left: 50%; top: 30%; animation-delay: 3s;">💎</div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">КвестоКот</div>
+                <div class="social-links">
+                    <a href="https://vk.com/shadowcustom5433" class="social-link" target="_blank">VK</a>
+                    <a href="https://t.me/Shadow_Custom" class="social-link" target="_blank">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>КвестоКот</h1>
+            <p>Волшебное приключение с радужным котиком!</p>
+            <a href="https://yandex.ru/games/app/408044?lang=ru" class="play-button" target="_blank">
+                🎮 Играть Сейчас
+            </a>
+        </section>
+
+        <section class="screenshots">
+            <h2>🎨 Скриншоты Игры</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-card">
+                    <img src="https://drive.google.com/uc?export=view&id=1dvVmyusvOMj0mkbpHdRjpsCNhbuuYx9_" alt="Главное меню КвестоКот">
+                    <div class="card-content">
+                        <h3>🏠 Главное Меню</h3>
+                        <p>Встречайте очаровательного радужного котика в волшебном лесу!</p>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="https://drive.google.com/uc?export=view&id=1oQNOoq6n2B0jt_iw0yCOLzE9qp8pgt8e" alt="Игровой процесс КвестоКот">
+                    <div class="card-content">
+                        <h3>🍔 Игровой Процесс</h3>
+                        <p>Собирайте вкусняшки и проходите увлекательные уровни!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>✨ Особенности Игры</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌈</div>
+                    <h3>Яркая Графика</h3>
+                    <p>Красочный мир полный волшебства и приключений</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Увлекательный Геймплей</h3>
+                    <p>Интересные головоломки и захватывающие квесты</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Приятная Музыка</h3>
+                    <p>Атмосферное звуковое сопровождение</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Достижения</h3>
+                    <p>Собирайте награды и открывайте новые уровни</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 КвестоКот. Создано с ❤️ для всех любителей котиков!</p>
+                <div class="footer-social">
+                    <a href="https://vk.com/shadowcustom5433" class="social-link" target="_blank">
+                        📱 VK Сообщество
+                    </a>
+                    <a href="https://t.me/Shadow_Custom" class="social-link" target="_blank">
+                        💬 Telegram
+                    </a>
+                    <a href="https://yandex.ru/games/app/408044?lang=ru" class="social-link" target="_blank">
+                        🎮 Играть в Яндекс.Играх
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Добавляем интерактивности
+        document.addEventListener('DOMContentLoaded', function() {
+            // Плавная прокрутка для внутренних ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Анимация появления карточек при скролле
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Наблюдаем за карточками
+            document.querySelectorAll('.screenshot-card, .feature-item').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Добавляем частицы при клике
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('play-button')) {
+                    createParticles(e.clientX, e.clientY);
+                }
+            });
+
+            function createParticles(x, y) {
+                const particles = ['⭐', '💫', '✨', '🌟', '💎'];
+                for (let i = 0; i < 10; i++) {
+                    const particle = document.createElement('div');
+                    particle.innerHTML = particles[Math.floor(Math.random() * particles.length)];
+                    particle.style.position = 'fixed';
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    particle.style.fontSize = '1.5rem';
+                    particle.style.pointerEvents = 'none';
+                    particle.style.zIndex = '1000';
+                    particle.style.animation = `particleFloat 1s ease-out forwards`;
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }
+            }
+
+            // CSS для анимации частиц
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes particleFloat {
+                    to {
+                        transform: translateY(-100px) translateX(${Math.random() * 200 - 100}px) scale(0);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
